@@ -4,9 +4,9 @@
   "description": "A text editor written with nodegui and TypeScript.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "webpack && nodegui-packer --pack ./dist",
-    "start": "webpack && qode ./dist/index.js",
-    "debug": "webpack && qode --inspect ./dist/index.js"
+    "build": "webpack --mode=production && nodegui-packer --pack ./dist",
+    "start": "webpack --mode=development && qode ./dist/index.js",
+    "debug": "webpack --mode=development && qode --inspect ./dist/index.js"
   },
   "repository": {
     "type": "git",
