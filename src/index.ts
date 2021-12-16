@@ -1,7 +1,6 @@
 import { QMainWindow, QWidget, QPlainTextEdit, FlexLayout } from "@nodegui/nodegui";
 import menuBar from "./lib/menu";
 
-// Create the main window
 export const mainWindow = new QMainWindow();
 mainWindow.setWindowTitle("nodepad");
 
