@@ -7,9 +7,7 @@
     <key>CFBundleExecutable</key>
     <string>nodepad</string>
     <key>CFBundleIdentifier</key>
-    <string>org.nodegui.exampleapp</string>
-    <key>CFBundleSignature</key>
-    <string>????</string>
+    <string>com.beef.nodepad</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
