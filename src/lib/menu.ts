@@ -1,10 +1,10 @@
-import { QMenuBar, QMenu, QAction, QFontDialog, FileMode } from "@nodegui/nodegui";
+import { FileMode, ButtonRole, QMenuBar, QMenu, QAction, QFontDialog, QMessageBox, QPushButton } from "@nodegui/nodegui";
 import { readFileSync, writeFileSync } from "fs";
 import callFileDialog from "./callFileDialog";
 import { editor } from "..";
+import inspector from "node:inspector";
 
 // TODO: Add support for submenus
-// TODO: Why am I trying to implement a React-like system?
 
 const menuItems = [
     {
@@ -22,6 +22,25 @@ const menuItems = [
                 exec: () => {
                     const selectedFiles = callFileDialog(FileMode.AnyFile);
                     if (selectedFiles.length > 0) { writeFileSync(selectedFiles[0], editor.toPlainText(), "utf-8"); }
+                },
+            },
+            {
+                title: "Inspect",
+                exec: () => {
+                    const messageBox = new QMessageBox();
+                    const accept = new QPushButton();
+                    accept.setText("Accept");
+                    messageBox.addButton(accept, ButtonRole.AcceptRole);
+
+                    if (!inspector.url()) {
+                        inspector.open();
+                        messageBox.setText(`Debugger listening on\n${inspector.url()}\nFor help, see https://nodejs.org/en/docs/inspector`);
+                        messageBox.exec();
+                    } else {
+                        inspector.close();
+                        messageBox.setText("Debugger closed");
+                        messageBox.exec();
+                    }
                 },
             },
         ]
@@ -42,10 +61,10 @@ const menuItems = [
                 },
             },
         ]
-    }
+    },
 ];
 
-export default function() {
+export default () => {
     const menuBar = new QMenuBar();
 
     for (const item of menuItems) {
