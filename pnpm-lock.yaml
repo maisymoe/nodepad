@@ -3,11 +3,13 @@ lockfileVersion: 5.3
 specifiers:
   '@nodegui/nodegui': ^0.43.0
   '@nodegui/packer': ^1.5.0
+  cumlisp: ^1.3.1
   esbuild: ^0.14.11
   typescript: ^4.5.4
 
 dependencies:
   '@nodegui/nodegui': 0.43.0
+  cumlisp: 1.3.1
 
 devDependencies:
   '@nodegui/packer': 1.5.0_@nodegui+nodegui@0.43.0
@@ -243,6 +245,10 @@ packages:
 
   /cuid/2.1.8:
     resolution: {integrity: sha512-xiEMER6E7TlTPnDxrM4eRiC6TRgjNX9xzEZ5U/Se2YJKr7Mq4pJn/2XEHjl3STcSh96GmkHPcBXLES8M29wyyg==}
+    dev: false
+
+  /cumlisp/1.3.1:
+    resolution: {integrity: sha512-otCUUXQnI2DUsIL7GUKR2N6m0DEZKnj8PojJTZEoYlppWRQ0QYLA1h2rcgCs0iUJjMIaV0ZNuFw8O/CKJSPbKg==}
     dev: false
 
   /debug/4.3.3:

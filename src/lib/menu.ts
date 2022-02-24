@@ -1,8 +1,9 @@
-import { FileMode, ButtonRole, QMenuBar, QMenu, QAction, QFontDialog, QMessageBox, QPushButton } from "@nodegui/nodegui";
+import { FileMode, ButtonRole, QMenuBar, QMenu, QAction, QFontDialog, QMessageBox, QPushButton, QInputDialog, QFont } from "@nodegui/nodegui";
 import { readFileSync, writeFileSync } from "fs";
 import callFileDialog from "./callFileDialog";
 import { editor } from "..";
 import inspector from "node:inspector";
+import { runPlugin } from "./VM";
 
 // TODO: Add support for submenus
 
@@ -31,6 +32,7 @@ const menuItems = [
                     const accept = new QPushButton();
                     accept.setText("Accept");
                     messageBox.addButton(accept, ButtonRole.AcceptRole);
+                    messageBox.setWindowTitle("Debugger");
 
                     if (!inspector.url()) {
                         inspector.open();
@@ -42,6 +44,26 @@ const menuItems = [
                         messageBox.exec();
                     }
                 },
+            },
+            {
+                title: "Evaluate plugin code",
+                exec: async() => {
+                    const dialog = new QInputDialog();
+                    dialog.setWindowTitle("LISP formatter");
+                    dialog.setLabelText("Enter plugin code (in LISP)");
+                    dialog.exec();
+
+                    const runResult = await runPlugin(dialog.textValue());
+                    if (runResult?.error) {
+                        const messageBox = new QMessageBox();
+                        const evaluate = new QPushButton();
+                        evaluate.setText("Evaluate");
+                        messageBox.addButton(evaluate, ButtonRole.AcceptRole);
+                        messageBox.setText(runResult.text);
+                        messageBox.setWindowTitle("LISP formatter message");
+                        messageBox.exec();
+                    }
+                }
             },
         ]
     },
